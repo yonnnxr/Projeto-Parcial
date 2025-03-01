@@ -9,5 +9,6 @@
     <title>Site Adm</title>
 
     <link rel="stylesheet" href="<?= VARIAVEIS['DIR_CSS'] ?>style.css">
+    <link rel="stylesheet" href="../assets/css/table.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
