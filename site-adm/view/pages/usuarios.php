@@ -1,9 +1,9 @@
 <?php 
 require_once '../components/head.php'; 
 require_once __DIR__ . '/../../model/UsuarioModel.php';
-require_once __DIR__ . '/../../config/database.php'; // Inclui o database.php
+require_once __DIR__ . '/../../config/database.php';
 
-$usuarioModel = new UsuarioModel($conn); // Cria uma instância do UsuarioModel
+$usuarioModel = new UsuarioModel($conn);
 ?>
 
 <body class="content">
@@ -33,15 +33,15 @@ $usuarioModel = new UsuarioModel($conn); // Cria uma instância do UsuarioModel
                         <td><?= $usuario['cpf'] ?></td>
                         <td><?= $usuario['data_nascimento'] ?></td>
                         <td>
-                            <a href="editar_usuario.php?id=<?= $usuario['id'] ?>">Editar</a>
-                            <a href="excluir_usuario.php?id=<?= $usuario['id'] ?>">Excluir</a>
+                            <a href="editar_usuario.php?id=<?= $usuario['id'] ?>"><span class="material-symbols-outlined">edit</span></a>
+                            <a href="excluir_usuario.php?id=<?= $usuario['id'] ?>"><span class="material-symbols-outlined">delete</span></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
-        <a href="adicionar_usuario.php">Adicionar Usuário</a>
+        <!-- <a href="adicionar_usuario.php">Adicionar Usuário</a> -->
     </main>
 
     <?php require_once '../components/footer.php'; ?>

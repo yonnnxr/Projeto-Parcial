@@ -3,7 +3,6 @@ require_once '../components/head.php';
 require_once __DIR__ . '/../../model/CategoriaModel.php';
 require_once __DIR__ . '/../../config/database.php';
 
-// Cria uma instância do CategoriaModel
 $categoriaModel = new CategoriaModel($conn);
 ?>
 
@@ -28,15 +27,15 @@ $categoriaModel = new CategoriaModel($conn);
                         <td><?= $categoria['id'] ?></td>
                         <td><?= $categoria['nome'] ?></td>
                         <td>
-                            <a href="editar_categoria.php?id=<?= $categoria['id'] ?>">Editar</a>
-                            <a href="excluir_categoria.php?id=<?= $categoria['id'] ?>">Excluir</a>
+                            <a href="editar_categoria.php?id=<?= $categoria['id'] ?>"><span class="material-symbols-outlined">edit</span></a>
+                            <a href="excluir_categoria.php?id=<?= $categoria['id'] ?>"><span class="material-symbols-outlined">delete</span></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
-        <a href="adicionar_categoria.php">Adicionar Categoria</a>
+        <!-- <a href="adicionar_categoria.php">Adicionar Categoria</a> -->
     </main>
 
     <?php require_once '../components/footer.php'; ?>

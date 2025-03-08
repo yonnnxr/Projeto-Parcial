@@ -3,10 +3,10 @@
 require_once __DIR__ . '/../config/database.php';
 
 class CategoriaModel {
-    private $conn; // Declaração da propriedade $conn
+    private $conn;
 
     public function __construct($conn) {
-        $this->conn = $conn; // Inicializa a propriedade $conn com a conexão recebida
+        $this->conn = $conn;
     }
 
     public function listar() {

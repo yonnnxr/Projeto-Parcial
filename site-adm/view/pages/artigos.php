@@ -19,6 +19,7 @@ $artigoModel = new ArtigoModel($conn);
                     <th>ID</th>
                     <th>Título</th>
                     <th>Conteúdo</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,15 +29,15 @@ $artigoModel = new ArtigoModel($conn);
                         <td><?= $artigo['titulo'] ?></td>
                         <td><?= $artigo['conteudo'] ?></td>
                         <td>
-                            <a href="editar_artigo.php?id=<?= $artigo['id'] ?>">Editar</a>
-                            <a href="excluir_artigo.php?id=<?= $artigo['id'] ?>">Excluir</a>
+                            <a href="editar_artigo.php?id=<?= $artigo['id'] ?>"><span class="material-symbols-outlined">edit</span></a>
+                            <a href="excluir_artigo.php?id=<?= $artigo['id'] ?>"><span class="material-symbols-outlined">delete</span></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
-        <a href="adicionar_artigo.php">Adicionar Artigo</a>
+        <!-- <a href="adicionar_artigo.php">Adicionar Artigo</a> -->
     </main>
 
     <?php require_once '../components/footer.php'; ?>

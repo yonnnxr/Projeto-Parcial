@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Adm</title>
     <link rel="stylesheet" href="../assets/css/table.css"> 
+    <link rel="stylesheet" href="../assets/css/editar_form.css"> 
     <link rel="stylesheet" href="<?= VARIAVEIS['DIR_CSS'] ?>style.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
