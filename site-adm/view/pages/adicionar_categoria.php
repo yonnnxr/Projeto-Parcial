@@ -1,10 +1,14 @@
-<?php 
-require_once '../components/head.php'; 
+<?php
+require_once '../components/head.php';
 require_once __DIR__ . '/../../model/CategoriaModel.php';
+require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
-    CategoriaModel::adicionar($nome);
+
+    $categoriaModel = new CategoriaModel($conn);
+    $categoriaModel->adicionar($nome);
+
     header('Location: categorias.php');
     exit();
 }
@@ -22,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required>
             </div>
+
             <button type="submit">Salvar</button>
         </form>
     </main>
@@ -30,4 +35,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="<?= VARIAVEIS['DIR_JS'] ?>main.js"></script>
 </body>
+
 </html>

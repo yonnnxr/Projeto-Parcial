@@ -13,6 +13,13 @@ $categoriaModel = new CategoriaModel($conn);
     <main class="content-grid">
         <h1>Categorias</h1>
 
+        <div>
+            <a href="adicionar_categoria.php" class="add-button">
+                <span class="material-symbols-outlined">add</span>
+                Adicionar categoria
+            </a>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -22,7 +29,7 @@ $categoriaModel = new CategoriaModel($conn);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($categoriaModel->listar() as $categoria): ?>
+                <?php foreach ($categoriaModel->listar() as $categoria) : ?>
                     <tr>
                         <td><?= $categoria['id'] ?></td>
                         <td><?= $categoria['nome'] ?></td>
@@ -34,12 +41,11 @@ $categoriaModel = new CategoriaModel($conn);
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <!-- <a href="adicionar_categoria.php">Adicionar Categoria</a> -->
     </main>
 
     <?php require_once '../components/footer.php'; ?>
 
     <script src="<?= VARIAVEIS['DIR_JS'] ?>main.js"></script>
 </body>
+
 </html>

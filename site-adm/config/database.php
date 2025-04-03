@@ -10,7 +10,6 @@ class Database {
     
     private $conn;
 
-    // responável por instânciar um objeto de Database
     public function __construct($host, $port, $username, 
                                 $password, $db) {
         $this->host = $host;
@@ -20,7 +19,6 @@ class Database {
         $this->db = $db;
     }
 
-    // responsável por criar a conexão com o DB
     public function getConnection() {
         $connUrl = "mysql:host=$this->host;
                     port=$this->port;
@@ -33,7 +31,6 @@ class Database {
 
         return $this->conn;
     }
-
 }
 
 $database = new Database(
@@ -44,3 +41,4 @@ $database = new Database(
     "siteadm"
 );
 $conn = $database->getConnection();
+?>

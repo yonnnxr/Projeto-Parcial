@@ -2,42 +2,53 @@
 
 require_once __DIR__ . '/../config/database.php';
 
-class CategoriaModel {
+class CategoriaModel
+{
     private $conn;
 
-    public function __construct($conn) {
+    public function __construct($conn)
+    {
         $this->conn = $conn;
     }
 
-    public function listar() {
+    public function listar()
+    {
         $stmt = $this->conn->query("SELECT * FROM categorias");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function buscarPorId($id) {
-        global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM categorias WHERE id = ?");
-        $stmt->execute([$id]);
+    public function buscarPorId($id)
+    {
+        $query = "SELECT * FROM categorias WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function adicionar($nome) {
-        global $pdo;
-        $stmt = $pdo->prepare("INSERT INTO categorias (nome) VALUES (?)");
-        $stmt->execute([$nome]);
+    public function adicionar($nome)
+    {
+        $query = "INSERT INTO categorias (nome) VALUES (:nome)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":nome", $nome);
+        $stmt->execute();
     }
 
-    public static function editar($id, $nome) {
-        global $pdo;
-        $stmt = $pdo->prepare("UPDATE categorias SET nome = ? WHERE id = ?");
-        $stmt->execute([$nome, $id]);
+    public function editar($id, $nome)
+    {
+        $query = "UPDATE categorias SET nome = :nome WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public static function excluir($id) {
-        global $pdo;
-        $stmt = $pdo->prepare("DELETE FROM categorias WHERE id = ?");
-        $stmt->execute([$id]);
+    public function excluir($id)
+    {
+        $query = "DELETE FROM categorias WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
     }
 }
-
-?>

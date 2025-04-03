@@ -1,5 +1,5 @@
-<?php 
-require_once '../components/head.php'; 
+<?php
+require_once '../components/head.php';
 require_once __DIR__ . '/../../model/UsuarioModel.php';
 require_once __DIR__ . '/../../config/database.php';
 
@@ -13,6 +13,13 @@ $usuarioModel = new UsuarioModel($conn);
     <main class="content-grid">
         <h1>Usuários</h1>
 
+        <div>
+            <a href="adicionar_usuario.php" class="add-button">
+                <span class="material-symbols-outlined">add</span>
+                Adicionar Usuário
+            </a>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -25,7 +32,7 @@ $usuarioModel = new UsuarioModel($conn);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($usuarioModel->listar() as $usuario): ?>
+                <?php foreach ($usuarioModel->listar() as $usuario) : ?>
                     <tr>
                         <td><?= $usuario['id'] ?></td>
                         <td><?= $usuario['nome'] ?></td>
@@ -40,12 +47,11 @@ $usuarioModel = new UsuarioModel($conn);
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <!-- <a href="adicionar_usuario.php">Adicionar Usuário</a> -->
     </main>
 
     <?php require_once '../components/footer.php'; ?>
 
     <script src="<?= VARIAVEIS['DIR_JS'] ?>main.js"></script>
 </body>
+
 </html>

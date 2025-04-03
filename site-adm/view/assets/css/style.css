@@ -3,6 +3,9 @@
 @import url(components/footer.css);
 @import url(components/navbar.css);
 @import url(components/sidebar.css);
+@import url(components/add_form.css);
+@import url(components/add_buttom.css);
+
 
 :root {
     --page-background-color: #ececec;

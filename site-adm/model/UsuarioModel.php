@@ -1,41 +1,58 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-class UsuarioModel {
+class UsuarioModel
+{
     private $conn;
 
-    public function __construct($conn) {
+    public function __construct($conn)
+    {
         $this->conn = $conn;
     }
-    public function listar() {
+    public function listar()
+    {
         $stmt = $this->conn->query("SELECT * FROM usuarios");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscarPorId($id) {
-        global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
-        $stmt->execute([$id]);
+    public function buscarPorId($id)
+    {
+        $query = "SELECT * FROM usuarios WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function adicionar($email, $nome, $cpf, $data_nascimento) {
-        global $pdo;
-        $stmt = $pdo->prepare("INSERT INTO usuarios (email, nome, cpf, data_nascimento) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$email, $nome, $cpf, $data_nascimento]);
+    public function adicionar($email, $nome, $cpf, $data_nascimento)
+    {
+        $query = "INSERT INTO usuarios (email, nome, cpf, data_nascimento) VALUES (:email, :nome, :cpf, :data_nascimento)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":cpf", $cpf);
+        $stmt->bindParam(":data_nascimento", $data_nascimento);
+        $stmt->execute();
     }
 
-    public function editar($id, $email, $nome, $cpf, $data_nascimento) {
-        global $pdo;
-        $stmt = $pdo->prepare("UPDATE usuarios SET email = ?, nome = ?, cpf = ?, data_nascimento = ? WHERE id = ?");
-        $stmt->execute([$email, $nome, $cpf, $data_nascimento, $id]);
+    public function editar($id, $email, $nome, $cpf, $data_nascimento)
+    {
+        $query = "UPDATE usuarios SET email = :email, nome = :nome, cpf = :cpf, data_nascimento = :data_nascimento WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":cpf", $cpf);
+        $stmt->bindParam(":data_nascimento", $data_nascimento);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function excluir($id) {
-        global $pdo;
-        $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
-        $stmt->execute([$id]);
+    public function excluir($id)
+    {
+        $query = "DELETE FROM usuarios WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
     }
 }
-
-?>

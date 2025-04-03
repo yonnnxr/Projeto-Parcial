@@ -1,15 +1,19 @@
-<?php 
-require_once '../components/head.php'; 
+<?php
+require_once '../components/head.php';
 require_once __DIR__ . '/../../model/ArtigoModel.php';
 require_once __DIR__ . '/../../model/CategoriaModel.php';
 require_once __DIR__ . '/../../model/UsuarioModel.php';
+require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
     $conteudo = $_POST['conteudo'];
     $categoria_id = $_POST['categoria_id'];
     $usuario_id = $_POST['usuario_id'];
-    ArtigoModel::adicionar($titulo, $conteudo, $categoria_id, $usuario_id);
+
+    $artigoModel = new ArtigoModel($conn);
+    $artigoModel->adicionar($titulo, $conteudo, $categoria_id, $usuario_id);
+
     header('Location: artigos.php');
     exit();
 }
@@ -34,7 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div>
                 <label for="categoria_id">Categoria:</label>
                 <select id="categoria_id" name="categoria_id" required>
-                    <?php foreach (CategoriaModel::listar() as $categoria): ?>
+                    <?php
+                    $categoriaModel = new CategoriaModel($conn);
+                    foreach ($categoriaModel->listar() as $categoria) :
+                    ?>
                         <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
                     <?php endforeach; ?>
                 </select>
@@ -42,7 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div>
                 <label for="usuario_id">Usuário:</label>
                 <select id="usuario_id" name="usuario_id" required>
-                    <?php foreach (UsuarioModel::listar() as $usuario): ?>
+                    <?php
+                    $usuarioModel = new UsuarioModel($conn);
+                    foreach ($usuarioModel->listar() as $usuario) :
+                    ?>
                         <option value="<?= $usuario['id'] ?>"><?= $usuario['nome'] ?></option>
                     <?php endforeach; ?>
                 </select>
@@ -55,4 +65,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="<?= VARIAVEIS['DIR_JS'] ?>main.js"></script>
 </body>
+
 </html>
